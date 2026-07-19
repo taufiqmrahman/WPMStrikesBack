@@ -2,7 +2,7 @@
 
 A fast-paced typing game featuring pixel-art characters. Test your typing speed, hit your WPM goals, and score points by defeating your opponent.
 
-**[Play the Live Demo Here]((https://wpmstrikesback.netlify.app/))**
+**[Play the Live Demo Here]([(https://wpmstrikesback.netlify.app/)](https://wpmstrikesback.netlify.app/))**
 
 ---
 
