@@ -2,7 +2,7 @@
 
 A fast-paced typing game featuring pixel-art characters. Test your typing speed, hit your WPM goals, and score points by defeating your opponent.
 
-**[Play the Live Demo Here]([(https://wpmstrikesback.netlify.app/)](https://wpmstrikesback.netlify.app/))**
+**[Play Live Here](https://wpmstrikesback.netlify.app/)**
 
 ---
 
@@ -53,6 +53,8 @@ Since the game uses standard HTML, CSS, and JS, setting it up on your local mach
 5.  If you type a wrong letter, it will turn red, and your character will get punched by the opponent.
 6.  Finish the word to strike your opponent and rack up Fight Points.
 7.  When the timer ends, review your final WPM and total score!
+
+---
 
 ## 👤 Author
 
