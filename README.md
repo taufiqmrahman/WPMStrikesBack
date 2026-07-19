@@ -33,11 +33,11 @@ Since the game uses standard HTML, CSS, and JS, setting it up on your local mach
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/taufiqmrahman/WPM-Strikes-Back.git](https://github.com/taufiqmrahman/WPM-Strikes-Back.git)
+    git clone [https://github.com/taufiqmrahman/WPMStrikesBack.git](https://github.com/taufiqmrahman/WPMStrikesBack.git)
     ```
 2.  **Navigate to the project directory:**
     ```bash
-    cd WPM-Strikes-Back
+    cd WPMStrikesBack
     ```
 3.  **Run the game:**
     Simply double-click the `index.html` file to open it in your default web browser.
