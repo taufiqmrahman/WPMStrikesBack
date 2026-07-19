@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="WPM Strikes Back — A typing speed game with lightsaber combat.">
+  <title>WPM Strikes Back</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================== CANVAS ==================== -->
+  <canvas id="gameCanvas"></canvas>
+
+  <!-- ==================== HUD (top bar) ==================== -->
+  <div id="hud">
+    <div class="hud-left">
+      <div class="hud-item">
+        <span class="hud-icon">⚡</span>
+        <div>
+          <div class="hud-label">Points</div>
+          <div class="hud-value" id="hudPoints">0</div>
+        </div>
+      </div>
+    </div>
+    <div class="hud-center">
+      <button class="hud-btn" id="btnPause" title="Pause"><span class="btn-icon">⏸</span> Pause</button>
+      <div class="hud-item">
+        <div class="hud-timer" id="hudTimer">--</div>
+      </div>
+      <button class="hud-btn" id="btnRestart" title="Restart"><span class="btn-icon">🔄</span> Restart</button>
+    </div>
+    <div class="hud-right">
+      <div class="hud-item">
+        <span class="hud-icon">🎯</span>
+        <div>
+          <div class="hud-label">WPM</div>
+          <div class="hud-value" id="hudWpm">0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PAUSE OVERLAY ==================== -->
+  <div id="pauseOverlay">
+    <div style="text-align:center">
+      <div class="pause-text">Paused</div>
+      <div class="pause-sub">press any key or click resume to continue</div>
+    </div>
+  </div>
+
+  <!-- ==================== WORD BOX (bottom) ==================== -->
+  <div id="wordBox">
+    <div id="wordInner"></div>
+  </div>
+
+  <!-- ==================== START HINT ==================== -->
+  <div id="startHint">start typing to begin...</div>
+
+  <!-- ==================== START SCREEN ==================== -->
+  <div class="overlay" id="startScreen">
+    <div class="glass-card">
+      <div class="title">WPM Strikes Back</div>
+      <div class="subtitle">May the force be with you</div>
+      <div class="duration-label">Match Duration</div>
+      <div class="duration-selector">
+        <button class="dur-btn active" data-duration="30" id="dur30">30s</button>
+        <button class="dur-btn" data-duration="60" id="dur60">1 min</button>
+      </div>
+      <button class="btn-primary" id="btnStart">⚔️&nbsp; Start Fight</button>
+    </div>
+  </div>
+
+  <!-- ==================== RESULTS SCREEN ==================== -->
+  <div class="overlay hidden" id="resultsScreen">
+    <div class="glass-card">
+      <div class="result-verdict" id="resultVerdict">Victory!</div>
+      <div class="subtitle" id="resultSub">The Force is strong with you</div>
+      <div class="results-grid">
+        <div class="stat-card">
+          <div class="stat-label">WPM</div>
+          <div class="stat-value" id="resWpm">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Fight Pts</div>
+          <div class="stat-value" id="resPoints">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Accuracy</div>
+          <div class="stat-value" id="resAccuracy">0%</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Duration</div>
+          <div class="stat-value" id="resDuration">60s</div>
+        </div>
+      </div>
+      <button class="btn-primary" id="btnReplay">🔄&nbsp; Play Again</button>
+    </div>
+  </div>
+
+  <!-- ==================== SCREEN FLASH EFFECTS ==================== -->
+  <div class="screen-flash" id="flashHit"></div>
+  <div class="screen-flash" id="flashAttack"></div>
+
+  <!-- ==================== GAME LOGIC ==================== -->
+  <script src="game.js"></script>
+
+</body>
+</html>
