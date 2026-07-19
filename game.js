@@ -997,7 +997,12 @@
   btnStart.addEventListener('click', startGame);
   btnReplay.addEventListener('click', () => {
     resScr.classList.add('hidden');
-    setTimeout(() => { startScr.classList.remove('hidden'); }, 300);
+    const modeSelect = document.getElementById('modeSelect');
+    if (modeSelect) {
+      setTimeout(() => { modeSelect.classList.remove('hidden'); }, 300);
+    } else {
+      setTimeout(() => { startScr.classList.remove('hidden'); }, 300);
+    }
   });
 
   // Prevent zoom & context menu

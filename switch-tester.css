@@ -1,0 +1,571 @@
+/* ========================================
+   WPM Strikes Back — Switch Tester Styles
+   ======================================== */
+
+/* ===== MODE SELECT OVERLAY ===== */
+#modeSelect {
+  position: fixed; inset: 0; z-index: 10;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+#modeSelect.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.mode-card {
+  background: rgba(16, 16, 32, 0.88);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px; padding: 48px 40px;
+  max-width: 560px; width: 90%; text-align: center;
+  box-shadow:
+    0 0 60px rgba(120, 80, 255, 0.15),
+    0 0 120px rgba(0, 200, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  animation: cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ===== MODE BUTTONS ===== */
+.mode-buttons {
+  display: flex; gap: 20px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.mode-btn {
+  width: 220px; padding: 32px 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 10px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative; overflow: hidden;
+}
+.mode-btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.08), rgba(56, 189, 248, 0.05));
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.mode-btn:hover {
+  border-color: rgba(167, 139, 250, 0.5);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow:
+    0 8px 32px rgba(167, 139, 250, 0.2),
+    0 0 60px rgba(124, 58, 237, 0.15);
+}
+.mode-btn:hover::before { opacity: 1; }
+.mode-btn:active { transform: translateY(-2px) scale(0.98); }
+
+.mode-icon {
+  font-size: 40px; line-height: 1;
+  position: relative; z-index: 1;
+  filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.3));
+}
+
+.mode-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 17px; font-weight: 700;
+  color: #fff; letter-spacing: 0.5px;
+  position: relative; z-index: 1;
+}
+
+.mode-desc {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px; font-weight: 400;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1.4; letter-spacing: 0.3px;
+  position: relative; z-index: 1;
+}
+
+
+/* ========================================
+   SWITCH TESTER SCREEN
+   ======================================== */
+#switchTesterScreen {
+  position: fixed; inset: 0; z-index: 10;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+#switchTesterScreen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+
+/* ===== BACK BUTTON ===== */
+.back-btn {
+  position: fixed; top: 20px; left: 20px; z-index: 12;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 18px;
+  background: rgba(16, 16, 32, 0.75);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px; font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-transform: uppercase;
+}
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(167, 139, 250, 0.4);
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.15);
+}
+.back-btn:active { transform: scale(0.95); }
+
+.back-arrow {
+  font-size: 18px; line-height: 1;
+  transition: transform 0.2s ease;
+}
+.back-btn:hover .back-arrow { transform: translateX(-3px); }
+
+
+/* ===== TESTER HEADER ===== */
+.tester-header {
+  text-align: center;
+  margin-bottom: 28px;
+  animation: cardIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tester-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(24px, 4vw, 36px); font-weight: 900;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #a78bfa, #38bdf8, #34d399);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px; line-height: 1.1;
+}
+
+.tester-sub {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(12px, 1.8vw, 15px);
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 2px; text-transform: uppercase;
+  font-weight: 400;
+}
+
+
+/* ===== TESTED COUNTER ===== */
+.tested-counter-card {
+  display: inline-flex; flex-direction: column;
+  align-items: center; gap: 8px;
+  margin-top: 16px;
+  background: rgba(16, 16, 32, 0.7);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 14px 28px;
+  box-shadow: 0 0 30px rgba(120, 80, 255, 0.08);
+  animation: cardIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+.tested-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px; font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.5px;
+}
+
+.tested-bar {
+  width: 180px; height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px; overflow: hidden;
+}
+
+.tested-progress {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, #7c3aed, #38bdf8, #34d399);
+  border-radius: 4px;
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
+
+/* ========================================
+   KEYBOARD LAYOUT
+   ======================================== */
+.keyboard-container {
+  max-width: 1050px; width: 95%;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 6px;
+  animation: cardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+.keyboard-main {
+  display: flex; gap: 20px;
+}
+
+.keyboard-left {
+  display: flex; flex-direction: column; gap: 6px;
+}
+
+.keyboard-right {
+  display: flex; flex-direction: column; gap: 6px;
+  margin-left: 4px;
+}
+
+.keyboard-row {
+  display: flex; gap: 5px;
+  justify-content: flex-start;
+}
+
+/* Nav cluster & arrow cluster wrappers */
+.nav-cluster {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.arrow-cluster {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 5px;
+  margin-top: auto;
+}
+
+.arrow-row {
+  display: flex; gap: 5px;
+}
+
+
+/* ========================================
+   INDIVIDUAL KEYS
+   ======================================== */
+.key {
+  width: 52px; height: 52px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px; font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.15s ease;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  flex-shrink: 0;
+}
+
+.key-main {
+  font-size: 13px; line-height: 1;
+  color: inherit;
+}
+
+.key-sub {
+  font-size: 9px; line-height: 1;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 2px;
+}
+
+
+/* ===== KEY STATES ===== */
+
+/* Hover */
+.key:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+/* Pressed — flash animation when key is tapped */
+.key.pressed {
+  background: rgba(74, 222, 128, 0.25);
+  border-color: rgba(74, 222, 128, 0.5);
+  color: #fff;
+  box-shadow:
+    0 0 16px rgba(74, 222, 128, 0.3),
+    0 0 40px rgba(74, 222, 128, 0.12),
+    inset 0 0 12px rgba(74, 222, 128, 0.1);
+  animation: keyPop 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Active — currently held down */
+.key.active {
+  background: rgba(132, 204, 22, 0.3);
+  border-color: rgba(132, 204, 22, 0.6);
+  color: #fff;
+  box-shadow:
+    0 0 20px rgba(132, 204, 22, 0.4),
+    0 0 50px rgba(132, 204, 22, 0.15),
+    inset 0 0 16px rgba(132, 204, 22, 0.15);
+  transform: scale(0.95);
+}
+
+/* Tested — has been pressed at least once */
+.key.tested {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.25);
+  color: rgba(255, 255, 255, 0.8);
+}
+.key.tested .key-sub {
+  color: rgba(34, 197, 94, 0.5);
+}
+
+
+/* ===== KEY POP ANIMATION ===== */
+@keyframes keyPop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+
+
+/* ========================================
+   SPECIAL KEY WIDTHS
+   ======================================== */
+
+/* Standard 1u key (default) */
+.key-1u { width: 52px; }
+
+/* Backspace — ~2.1u */
+.key-backspace { width: 130px; }
+
+/* Tab — ~1.5u */
+.key-tab { width: 80px; }
+
+/* Caps Lock — ~1.7u */
+.key-caps { width: 95px; }
+
+/* Enter — ~2.1u */
+.key-enter { width: 130px; }
+
+/* Backslash — ~1.5u */
+.key-backslash { width: 80px; }
+
+/* Left Shift — ~2.1u */
+.key-shift-left { width: 130px; }
+
+/* Right Shift — ~2.7u */
+.key-shift-right { width: 160px; }
+
+/* Spacebar */
+.key-space {
+  width: 380px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* Bottom row modifiers */
+.key-fn   { width: 55px; font-size: 11px; }
+.key-ctrl { width: 55px; font-size: 11px; }
+.key-alt  { width: 55px; font-size: 11px; }
+.key-win  { width: 55px; font-size: 11px; }
+
+/* Arrow keys */
+.key-arrow {
+  width: 40px; height: 40px;
+  font-size: 16px;
+}
+.key-arrow-wide {
+  width: 40px; height: 19px;
+  font-size: 12px;
+}
+
+/* Nav cluster keys (Ins, Home, PgUp, Del, End, PgDn, PrtSc, ScrLk, Pause) */
+.key-nav {
+  width: 52px; height: 52px;
+  font-size: 10px;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Function keys row */
+.key-fn-row {
+  width: 52px; height: 40px;
+  font-size: 11px;
+}
+
+/* Escape key */
+.key-esc {
+  width: 52px; height: 40px;
+  font-size: 11px;
+}
+
+
+/* ========================================
+   KEY LABEL ALIGNMENT
+   ======================================== */
+.key.has-sub {
+  justify-content: center; gap: 1px;
+}
+
+/* Keys with only single label */
+.key.single-label {
+  justify-content: center;
+}
+
+
+/* ========================================
+   KEYBOARD SECTIONS SPACING
+   ======================================== */
+
+/* Gap between main keys and nav cluster */
+.keyboard-right {
+  padding-left: 16px;
+}
+
+/* Function key row spacing */
+.fn-row {
+  margin-bottom: 10px;
+}
+
+/* Esc gap from F-keys */
+.fn-gap {
+  width: 24px; flex-shrink: 0;
+}
+
+/* Smaller gap between function key groups (F1-F4, F5-F8, F9-F12) */
+.fn-gap-sm {
+  width: 16px; flex-shrink: 0;
+}
+
+/* Gap before navigation cluster */
+.nav-gap {
+  width: 20px; flex-shrink: 0;
+}
+
+/* Spacer matching 1u key width (for arrow key alignment) */
+.key-spacer-1u {
+  width: 40px; flex-shrink: 0;
+}
+
+/* Bottom row modifier keys (fn, control, alt) */
+.key-mod {
+  width: 62px;
+  font-size: 11px;
+}
+
+/* Windows key */
+.key-win {
+  width: 55px;
+  font-size: 16px;
+}
+
+/* Numlock standalone position — sits at end of row */
+.numlock-float {
+  display: none;
+}
+
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+/* Medium screens (tablets) */
+@media (max-width: 1100px) {
+  .keyboard-container { max-width: 95vw; }
+
+  .key {
+    width: 46px; height: 46px;
+    font-size: 12px; border-radius: 7px;
+  }
+  .key-sub { font-size: 8px; }
+  .key-backspace { width: 112px; }
+  .key-tab { width: 70px; }
+  .key-caps { width: 84px; }
+  .key-enter { width: 112px; }
+  .key-backslash { width: 70px; }
+  .key-shift-left { width: 112px; }
+  .key-shift-right { width: 138px; }
+  .key-space { width: 320px; }
+  .key-mod { width: 52px; }
+  .key-fn, .key-ctrl, .key-alt, .key-win { width: 48px; }
+  .key-arrow { width: 36px; height: 36px; }
+  .key-arrow-wide { width: 36px; height: 17px; }
+  .key-nav { width: 46px; height: 46px; font-size: 9px; }
+  .key-fn-row { width: 46px; height: 36px; }
+  .key-esc { width: 46px; height: 36px; }
+
+  .keyboard-row { gap: 4px; }
+  .keyboard-container { gap: 4px; }
+  .keyboard-main { gap: 14px; }
+}
+
+/* Small screens */
+@media (max-width: 860px) {
+  .keyboard-right { display: none; }
+  .keyboard-main { gap: 0; }
+
+  .key {
+    width: 40px; height: 40px;
+    font-size: 11px; border-radius: 6px;
+  }
+  .key-sub { font-size: 7px; }
+  .key-backspace { width: 96px; }
+  .key-tab { width: 60px; }
+  .key-caps { width: 72px; }
+  .key-enter { width: 96px; }
+  .key-backslash { width: 60px; }
+  .key-shift-left { width: 96px; }
+  .key-shift-right { width: 118px; }
+  .key-space { width: 260px; }
+  .key-mod { width: 42px; }
+  .key-fn, .key-ctrl, .key-alt, .key-win { width: 40px; font-size: 9px; }
+  .key-fn-row { width: 40px; height: 32px; font-size: 9px; }
+  .key-esc { width: 40px; height: 32px; font-size: 9px; }
+
+  .keyboard-row { gap: 3px; }
+  .keyboard-container { gap: 3px; }
+  .fn-gap { width: 16px; }
+  .fn-group-gap { width: 10px; }
+
+  .tester-title { font-size: 24px; }
+  .counter-card { padding: 10px 20px; }
+  .counter-text { font-size: 14px; }
+  .counter-progress { width: 140px; }
+
+  .back-btn { top: 14px; left: 14px; padding: 8px 14px; font-size: 12px; }
+}
+
+/* Extra small screens (phones) */
+@media (max-width: 600px) {
+  .mode-card {
+    padding: 32px 24px;
+    border-radius: 18px;
+    max-width: 95vw;
+  }
+
+  .mode-buttons {
+    flex-direction: column;
+    align-items: center; gap: 14px;
+  }
+
+  .mode-btn {
+    width: 100%; max-width: 260px;
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+  .mode-btn-icon { font-size: 32px; }
+  .mode-btn-title { font-size: 15px; }
+  .mode-btn-desc { font-size: 12px; }
+
+  .keyboard-container {
+    transform: scale(0.75);
+    transform-origin: top center;
+  }
+
+  .tester-header { margin-bottom: 16px; }
+  .tested-counter { margin-bottom: 16px; }
+
+  .key {
+    width: 36px; height: 36px;
+    font-size: 10px; border-radius: 5px;
+  }
+  .key-backspace { width: 82px; }
+  .key-tab { width: 52px; }
+  .key-caps { width: 62px; }
+  .key-enter { width: 82px; }
+  .key-shift-left { width: 82px; }
+  .key-shift-right { width: 100px; }
+  .key-space { width: 210px; font-size: 9px; }
+  .key-fn, .key-ctrl, .key-alt, .key-win { width: 36px; font-size: 8px; }
+}

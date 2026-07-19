@@ -1,18 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="/darth-vader-favicon.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="description" content="WPM Strikes Back — A typing speed game with lightsaber combat.">
+  <meta name="description" content="WPM Strikes Back — A typing speed game with lightsaber combat and keyboard switch tester.">
   <title>WPM Strikes Back</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="switch-tester.css">
 </head>
 <body>
 
   <!-- ==================== CANVAS ==================== -->
   <canvas id="gameCanvas"></canvas>
+
+  <!-- ==================== MODE SELECTION SCREEN ==================== -->
+  <div class="overlay" id="modeSelect">
+    <div class="glass-card mode-card">
+      <div class="title">WPM Strikes Back</div>
+      <div class="subtitle">Choose your path</div>
+      <div class="mode-buttons">
+        <button class="mode-btn" id="btnSwitchTest">
+          <div class="mode-icon">⌨️</div>
+          <div class="mode-title">Switch Tester</div>
+          <div class="mode-desc">Test your keyboard switches</div>
+        </button>
+        <button class="mode-btn" id="btnTypingSpeed">
+          <div class="mode-icon">⚔️</div>
+          <div class="mode-title">Typing Speed</div>
+          <div class="mode-desc">Battle Vader with your WPM</div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SWITCH TESTER SCREEN ==================== -->
+  <div class="overlay hidden" id="switchTesterScreen">
+    <button class="back-btn" id="btnBack">
+      <span class="back-arrow">←</span> Back
+    </button>
+
+    <div class="tester-header">
+      <div class="tester-title">Switch Tester</div>
+      <div class="tester-sub">Press any key or click to test</div>
+      <div class="tested-counter-card">
+        <div class="tested-text"><span id="testedCount">0</span> / <span id="totalKeyCount">0</span> keys tested</div>
+        <div class="tested-bar">
+          <div class="tested-progress" id="testedProgress"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="keyboard-container">
+      <!-- ===== ROW 0: Function Keys ===== -->
+      <div class="keyboard-row row-fn">
+        <div class="key key-1u" data-key="esc">
+          <span class="key-main">esc</span>
+        </div>
+        <div class="fn-gap"></div>
+        <div class="key key-1u" data-key="f1"><span class="key-main">F1</span></div>
+        <div class="key key-1u" data-key="f2"><span class="key-main">F2</span></div>
+        <div class="key key-1u" data-key="f3"><span class="key-main">F3</span></div>
+        <div class="key key-1u" data-key="f4"><span class="key-main">F4</span></div>
+        <div class="fn-gap-sm"></div>
+        <div class="key key-1u" data-key="f5"><span class="key-main">F5</span></div>
+        <div class="key key-1u" data-key="f6"><span class="key-main">F6</span></div>
+        <div class="key key-1u" data-key="f7"><span class="key-main">F7</span></div>
+        <div class="key key-1u" data-key="f8"><span class="key-main">F8</span></div>
+        <div class="fn-gap-sm"></div>
+        <div class="key key-1u" data-key="f9"><span class="key-main">F9</span></div>
+        <div class="key key-1u" data-key="f10"><span class="key-main">F10</span></div>
+        <div class="key key-1u" data-key="f11"><span class="key-main">F11</span></div>
+        <div class="key key-1u" data-key="f12"><span class="key-main">F12</span></div>
+
+        <div class="nav-gap"></div>
+        <div class="key key-1u" data-key="printscreen">
+          <span class="key-main">print<br>screen</span>
+        </div>
+        <div class="key key-1u" data-key="scrolllock">
+          <span class="key-main">scroll<br>lock</span>
+        </div>
+        <div class="key key-1u" data-key="pause">
+          <span class="key-main">pause</span>
+        </div>
+      </div>
+
+      <!-- ===== ROW 1: Number Row ===== -->
+      <div class="keyboard-row row-number">
+        <div class="key key-1u" data-key="backquote">
+          <span class="key-sub">~</span>
+          <span class="key-main">`</span>
+        </div>
+        <div class="key key-1u" data-key="1">
+          <span class="key-sub">!</span>
+          <span class="key-main">1</span>
+        </div>
+        <div class="key key-1u" data-key="2">
+          <span class="key-sub">@</span>
+          <span class="key-main">2</span>
+        </div>
+        <div class="key key-1u" data-key="3">
+          <span class="key-sub">#</span>
+          <span class="key-main">3</span>
+        </div>
+        <div class="key key-1u" data-key="4">
+          <span class="key-sub">$</span>
+          <span class="key-main">4</span>
+        </div>
+        <div class="key key-1u" data-key="5">
+          <span class="key-sub">%</span>
+          <span class="key-main">5</span>
+        </div>
+        <div class="key key-1u" data-key="6">
+          <span class="key-sub">^</span>
+          <span class="key-main">6</span>
+        </div>
+        <div class="key key-1u" data-key="7">
+          <span class="key-sub">&amp;</span>
+          <span class="key-main">7</span>
+        </div>
+        <div class="key key-1u" data-key="8">
+          <span class="key-sub">*</span>
+          <span class="key-main">8</span>
+        </div>
+        <div class="key key-1u" data-key="9">
+          <span class="key-sub">(</span>
+          <span class="key-main">9</span>
+        </div>
+        <div class="key key-1u" data-key="0">
+          <span class="key-sub">)</span>
+          <span class="key-main">0</span>
+        </div>
+        <div class="key key-1u" data-key="minus">
+          <span class="key-sub">_</span>
+          <span class="key-main">-</span>
+        </div>
+        <div class="key key-1u" data-key="equal">
+          <span class="key-sub">+</span>
+          <span class="key-main">=</span>
+        </div>
+        <div class="key key-backspace" data-key="backspace">
+          <span class="key-main">backspace</span>
+        </div>
+
+        <div class="nav-gap"></div>
+        <div class="key key-1u" data-key="insert"><span class="key-main">insert</span></div>
+        <div class="key key-1u" data-key="home"><span class="key-main">home</span></div>
+        <div class="key key-1u" data-key="pageup"><span class="key-main">page<br>up</span></div>
+      </div>
+
+      <!-- ===== ROW 2: QWERTY Row ===== -->
+      <div class="keyboard-row">
+        <div class="key key-tab" data-key="tab">
+          <span class="key-main">tab</span>
+        </div>
+        <div class="key key-1u" data-key="q"><span class="key-main">Q</span></div>
+        <div class="key key-1u" data-key="w"><span class="key-main">W</span></div>
+        <div class="key key-1u" data-key="e"><span class="key-main">E</span></div>
+        <div class="key key-1u" data-key="r"><span class="key-main">R</span></div>
+        <div class="key key-1u" data-key="t"><span class="key-main">T</span></div>
+        <div class="key key-1u" data-key="y"><span class="key-main">Y</span></div>
+        <div class="key key-1u" data-key="u"><span class="key-main">U</span></div>
+        <div class="key key-1u" data-key="i"><span class="key-main">I</span></div>
+        <div class="key key-1u" data-key="o"><span class="key-main">O</span></div>
+        <div class="key key-1u" data-key="p"><span class="key-main">P</span></div>
+        <div class="key key-1u" data-key="bracketleft">
+          <span class="key-sub">{</span>
+          <span class="key-main">[</span>
+        </div>
+        <div class="key key-1u" data-key="bracketright">
+          <span class="key-sub">}</span>
+          <span class="key-main">]</span>
+        </div>
+        <div class="key key-backslash" data-key="backslash">
+          <span class="key-sub">|</span>
+          <span class="key-main">\</span>
+        </div>
+
+        <div class="nav-gap"></div>
+        <div class="key key-1u" data-key="delete"><span class="key-main">delete</span></div>
+        <div class="key key-1u" data-key="end"><span class="key-main">end</span></div>
+        <div class="key key-1u" data-key="pagedown"><span class="key-main">page<br>down</span></div>
+      </div>
+
+      <!-- ===== ROW 3: Home Row ===== -->
+      <div class="keyboard-row">
+        <div class="key key-caps" data-key="caps">
+          <span class="key-main">caps lock</span>
+        </div>
+        <div class="key key-1u" data-key="a"><span class="key-main">A</span></div>
+        <div class="key key-1u" data-key="s"><span class="key-main">S</span></div>
+        <div class="key key-1u" data-key="d"><span class="key-main">D</span></div>
+        <div class="key key-1u" data-key="f"><span class="key-main">F</span></div>
+        <div class="key key-1u" data-key="g"><span class="key-main">G</span></div>
+        <div class="key key-1u" data-key="h"><span class="key-main">H</span></div>
+        <div class="key key-1u" data-key="j"><span class="key-main">J</span></div>
+        <div class="key key-1u" data-key="k"><span class="key-main">K</span></div>
+        <div class="key key-1u" data-key="l"><span class="key-main">L</span></div>
+        <div class="key key-1u" data-key="semicolon">
+          <span class="key-sub">:</span>
+          <span class="key-main">;</span>
+        </div>
+        <div class="key key-1u" data-key="quote">
+          <span class="key-sub">"</span>
+          <span class="key-main">'</span>
+        </div>
+        <div class="key key-enter" data-key="enter">
+          <span class="key-main">enter</span>
+        </div>
+      </div>
+
+      <!-- ===== ROW 4: Shift Row ===== -->
+      <div class="keyboard-row">
+        <div class="key key-shift-left" data-key="shift-left">
+          <span class="key-main">shift</span>
+        </div>
+        <div class="key key-1u" data-key="z"><span class="key-main">Z</span></div>
+        <div class="key key-1u" data-key="x"><span class="key-main">X</span></div>
+        <div class="key key-1u" data-key="c"><span class="key-main">C</span></div>
+        <div class="key key-1u" data-key="v"><span class="key-main">V</span></div>
+        <div class="key key-1u" data-key="b"><span class="key-main">B</span></div>
+        <div class="key key-1u" data-key="n"><span class="key-main">N</span></div>
+        <div class="key key-1u" data-key="m"><span class="key-main">M</span></div>
+        <div class="key key-1u" data-key="comma">
+          <span class="key-sub">&lt;</span>
+          <span class="key-main">,</span>
+        </div>
+        <div class="key key-1u" data-key="period">
+          <span class="key-sub">&gt;</span>
+          <span class="key-main">.</span>
+        </div>
+        <div class="key key-1u" data-key="slash">
+          <span class="key-sub">?</span>
+          <span class="key-main">/</span>
+        </div>
+        <div class="key key-shift-right" data-key="shift-right">
+          <span class="key-main">shift</span>
+        </div>
+
+        <div class="nav-gap"></div>
+        <div class="key-spacer-1u"></div>
+        <div class="key key-arrow" data-key="up"><span class="key-main">▲</span></div>
+        <div class="key key-1u" data-key="numlock"><span class="key-main">num<br>lock</span></div>
+      </div>
+
+      <!-- ===== ROW 5: Bottom Row ===== -->
+      <div class="keyboard-row row-bottom">
+        <div class="key key-mod" data-key="fn"><span class="key-main">fn</span></div>
+        <div class="key key-mod" data-key="ctrl-left"><span class="key-main">control</span></div>
+        <div class="key key-mod" data-key="alt-left"><span class="key-main">alt</span></div>
+        <div class="key key-win" data-key="win-left"><span class="key-main">⊞</span></div>
+        <div class="key key-space" data-key="space"><span class="key-main"></span></div>
+        <div class="key key-win" data-key="win-right"><span class="key-main">⊞</span></div>
+        <div class="key key-mod" data-key="alt-right"><span class="key-main">alt</span></div>
+
+        <div class="nav-gap"></div>
+        <div class="key key-arrow" data-key="left"><span class="key-main">◄</span></div>
+        <div class="key key-arrow" data-key="down"><span class="key-main">▼</span></div>
+        <div class="key key-arrow" data-key="right"><span class="key-main">►</span></div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- ==================== HUD (top bar) ==================== -->
   <div id="hud">
@@ -59,8 +308,8 @@
   <!-- ==================== START HINT ==================== -->
   <div id="startHint">start typing to begin...</div>
 
-  <!-- ==================== START SCREEN ==================== -->
-  <div class="overlay" id="startScreen">
+  <!-- ==================== START SCREEN (hidden by default now) ==================== -->
+  <div class="overlay hidden" id="startScreen">
     <div class="glass-card">
       <div class="title">WPM Strikes Back</div>
       <div class="subtitle">May the force be with you</div>
@@ -106,6 +355,7 @@
 
   <!-- ==================== GAME LOGIC ==================== -->
   <script src="game.js"></script>
+  <script src="switch-tester.js"></script>
 
 </body>
 </html>
