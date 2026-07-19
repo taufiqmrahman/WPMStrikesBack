@@ -212,6 +212,11 @@
 .keyboard-row {
   display: flex; gap: 5px;
   justify-content: flex-start;
+  width: 100%;
+}
+
+.row-fn {
+  margin-bottom: 10px;
 }
 
 /* Nav cluster & arrow cluster wrappers */
@@ -324,6 +329,15 @@
 /* Standard 1u key (default) */
 .key-1u { width: 52px; }
 
+/* Eject key — small green button at end of function row */
+.key-eject {
+  width: 38px; height: 38px;
+  background: rgba(74, 222, 128, 0.3);
+  border-color: rgba(74, 222, 128, 0.4);
+  color: #fff;
+  font-size: 10px;
+}
+
 /* Backspace — ~2.1u */
 .key-backspace { width: 130px; }
 
@@ -360,9 +374,9 @@
 .key-alt  { width: 55px; font-size: 11px; }
 .key-win  { width: 55px; font-size: 11px; }
 
-/* Arrow keys */
+/* Arrow keys — same width as nav keys so columns align */
 .key-arrow {
-  width: 40px; height: 40px;
+  width: 52px; height: 52px;
   font-size: 16px;
 }
 .key-arrow-wide {
@@ -428,14 +442,14 @@
   width: 16px; flex-shrink: 0;
 }
 
-/* Gap before navigation cluster */
+/* Gap before navigation cluster — flex-grow to push nav keys to right edge */
 .nav-gap {
-  width: 20px; flex-shrink: 0;
+  flex: 1 0 20px;
 }
 
 /* Spacer matching 1u key width (for arrow key alignment) */
 .key-spacer-1u {
-  width: 40px; flex-shrink: 0;
+  width: 52px; flex-shrink: 0;
 }
 
 /* Bottom row modifier keys (fn, control, alt) */
@@ -479,8 +493,8 @@
   .key-space { width: 320px; }
   .key-mod { width: 52px; }
   .key-fn, .key-ctrl, .key-alt, .key-win { width: 48px; }
-  .key-arrow { width: 36px; height: 36px; }
-  .key-arrow-wide { width: 36px; height: 17px; }
+  .key-arrow { width: 46px; height: 46px; }
+  .key-spacer-1u { width: 46px; }
   .key-nav { width: 46px; height: 46px; font-size: 9px; }
   .key-fn-row { width: 46px; height: 36px; }
   .key-esc { width: 46px; height: 36px; }
