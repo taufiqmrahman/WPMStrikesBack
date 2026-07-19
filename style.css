@@ -203,19 +203,7 @@ html, body {
   margin-left:-1px;
   animation:blink 1s step-end infinite;
 }
-.copyright-watermark {
-    position: fixed;
-    bottom: 15px; /* Distance from the bottom of the screen */
-    left: 50%;
-    transform: translateX(-50%); /* Centers the text perfectly */
-    color: rgba(255, 255, 255, 0.4); /* White text with 40% opacity */
-    font-family: sans-serif; /* Change this to match your pixel font if preferred */
-    font-size: 14px;
-    letter-spacing: 1px;
-    pointer-events: none; /* Ensures users can click "through" it if needed */
-    z-index: 9999; /* Keeps it on top of the cosmic background */
-    user-select: none; /* Prevents text highlighting */
-}
+
 @keyframes blink { 50%{border-color:transparent;} }
 
 /* ===== START HINT ===== */
